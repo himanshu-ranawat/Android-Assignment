@@ -7,7 +7,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.core2.isNetworkConnected
 import com.example.assignment.R
 import com.example.core2.*
@@ -82,24 +81,12 @@ class FeedsFragment : AbstractBaseFragment() {
     private fun observeData() {
         feedsDetailViewModel.feedsLiveData.observe(viewLifecycleOwner, Observer {
             activityMainBinder.showSwipeProgress(false)
-            when (resources?.configuration?.orientation) {
-                Configuration.ORIENTATION_LANDSCAPE -> {
-                    activityMainBinder.setRecyclerLayoutManager(
-                        StaggeredGridLayoutManager(
-                            1,
-                            StaggeredGridLayoutManager.VERTICAL
-                        )
-                    )
-                }
-                else -> {
-                    activityMainBinder.setRecyclerLayoutManager(
-                        LinearLayoutManager(
-                            requireContext(),
-                            RecyclerView.VERTICAL, false
-                        )
-                    )
-                }
-            }
+            activityMainBinder.setRecyclerLayoutManager(
+                LinearLayoutManager(
+                    requireContext(),
+                    RecyclerView.VERTICAL, false
+                )
+            )
             activity?.title = feedsDetailViewModel.getPageTitle()
             activityMainBinder.feedsAdapter?.addAllItems(it)
         })
