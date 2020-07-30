@@ -1,6 +1,5 @@
 package com.example.assignment.feed.view
 
-import android.content.res.Configuration
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
@@ -53,6 +52,10 @@ class FeedsFragment : AbstractBaseFragment() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(EXTRA_FLAG_CALL_API, false)
+        super.onSaveInstanceState(outState)
+    }
 
     /**
      * Method to handle swipe refresh callback
